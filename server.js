@@ -3,7 +3,6 @@ const http = require("http");
 const pureimage = require("pureimage");
 const sharp = require("sharp");
 
-const image = fs.readFileSync("amogus.png")
 const font = pureimage.registerFont("Roboto-Regular.ttf", "Roboto");
 font.loadSync();
 
@@ -28,9 +27,8 @@ const server = http.createServer((req, res) => {
     text = decodeURI(req.url.slice(1));
     ctx.clearRect(0, 0, 1000, 1000);
     ctx.fillText(text, 0, 0);
-
     metrics = ctx.measureText(text);
-
+    
     pureimage.encodePNGToStream(img, fs.createWriteStream("out.png")).then(() => {
         sharp("out.png").extract({
             left: 0,
