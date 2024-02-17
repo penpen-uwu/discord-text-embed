@@ -16,6 +16,7 @@ ctx.font = "40px Roboto";
 ctx.textBaseline = "top"
 
 const server = http.createServer((req, res) => {
+    console.log(req.url);
     if (req.url == "/") {
         res.setHeader("Content-Type", "text/plain");
         res.end("no text")
@@ -28,7 +29,7 @@ const server = http.createServer((req, res) => {
     ctx.clearRect(0, 0, 1000, 1000);
     ctx.fillText(text, 0, 0);
     metrics = ctx.measureText(text);
-    
+
     pureimage.encodePNGToStream(img, fs.createWriteStream("out.png")).then(() => {
         sharp("out.png").extract({
             left: 0,
